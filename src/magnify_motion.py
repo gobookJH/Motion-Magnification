@@ -3,19 +3,13 @@ from utils import *
 from filterbank import TemporalFilter
 
 
-
 def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, window_size=30, 
 		magnif_factor=1, fps_bandpass=600):
-	
-
-	steer_pyr = Steerable(5)
-
 	# Make Video Reader and Writer
 	videoReader = cv2.VideoCapture(input_video_filename)
 	nFrames = int(videoReader.get(cv2.CAP_PROP_FRAME_COUNT))
 	
 	videoWriter = make_video_writer(videoReader, output_video_filename)
-
 
 	# Make Steerable Pyramid
 	steer_pyr = Steerable(5)
@@ -24,15 +18,7 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 	temp_filt = TemporalFilter(window_size, lowFreq, highFreq, fps=fps_bandpass)
 
 	print("Total Number of Frames = ", nFrames)
-	# alphas = np.random.normal(magnif_factor, magnif_factor/2, size=int(nFrames + window_size))
 
-	# Fs = int(nFrames + window_size)
-	# f = 5
-	# sample = int(nFrames + window_size)
-	# x = np.arange(sample)
-	# alphas = 40*np.sin(2 * np.pi * f * x / Fs)
-	# nFrames + window_size
-	# nFrames = 100
 	for frame_num in range(nFrames + window_size):
 		print("frame: " + str(frame_num))
 		if frame_num < nFrames:
@@ -67,9 +53,7 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 			except StopIteration:
 				continue
 
-			# Magnify temporally filtered phases 
-			# factor = alphas[frame_num]
-			# factor = 0.01
+			# Magnify temporally filtered phases
 			magnified_filtered = magnif_factor * filtered_phases
 			magnified_phase = (phases - filtered_phases) + magnified_filtered
 
@@ -93,22 +77,12 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 			final_img[:,:,2] = output_img
 			# final_img = np.stack([output_img, output_img, output_img])
 
-
 			# write video
 			res = cv2.convertScaleAbs(final_img)
 			videoWriter.write(res)
 
-
 	videoReader.release()
 	videoWriter.release()
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -123,8 +97,6 @@ if __name__ == '__main__':
 
 	lowFreq = 72
 	highFreq = 92
-	
-
 
 	magnify(input_video_filename, lowFreq, highFreq, output_video_filename, window_size=window_size, 
 		magnif_factor=magnif_factor, fps_bandpass=fps_bandpass)
