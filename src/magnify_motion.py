@@ -31,8 +31,8 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 	# sample = int(nFrames + window_size)
 	# x = np.arange(sample)
 	# alphas = 40*np.sin(2 * np.pi * f * x / Fs)
-# nFrames + window_size
-	nFrames = 100
+	# nFrames + window_size
+	# nFrames = 100
 	for frame_num in range(nFrames + window_size):
 		print("frame: " + str(frame_num))
 		if frame_num < nFrames:
@@ -69,8 +69,8 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 
 			# Magnify temporally filtered phases 
 			# factor = alphas[frame_num]
-			factor = 0.01
-			magnified_filtered = factor * filtered_phases 
+			# factor = 0.01
+			magnified_filtered = magnif_factor * filtered_phases
 			magnified_phase = (phases - filtered_phases) + magnified_filtered
 
 			# Reconstruct steerable pyramid
@@ -117,8 +117,8 @@ if __name__ == '__main__':
 	output_video_filename = '../output_videos/guitar' + '_magnified' + '.avi'
 
 	# params
-	window_size = 10
-	magnif_factor = 30
+	window_size = 30
+	magnif_factor = 20
 	fps_bandpass = 600
 
 	lowFreq = 72
