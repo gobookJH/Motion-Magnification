@@ -113,8 +113,8 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 
 if __name__ == '__main__':
 	# define input and output
-	input_video_filename = '../videos/tulip.mp4'
-	output_video_filename = '../videos/tulip' + '_magnified_6' + '.avi'
+	input_video_filename = '../videos/guitar.mp4'
+	output_video_filename = '../output_videos/guitar' + '_magnified' + '.avi'
 
 	# params
 	window_size = 10
